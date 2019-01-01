@@ -19,13 +19,21 @@ router.get('/users', (req, res) => {
   })
 })
 
+router.get('/users/:id/view', (req, res) => {
+  const { id } = req.params
+
+  User.findById(id).then((user) => {
+    res.render('view', { user })
+  })
+})
+
 router.get('/users/search', (req, res) => {
   res.render('search')
 })
 
 router.post('/users/search', (req, res) => {
   const { query } = req.body
-  
+
   User.find( { $text: { $search: query } } ).then((users) => {
     if (!users) return res.status(404).send(`Sorry, we couldn't find that.`)
 

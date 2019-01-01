@@ -1,56 +1,62 @@
 <% include partials/top %>
 
+
+
 <div id="homeContainer" class="container">
 
   <h1 class="text-center">Results List</h1>
 
-  <table class="table">
-    
-    <thead class="table-dark">
+  <div class="table-responsive-md">
+
+    <table class="table">
       
-      <tr>
+      <thead class="table-dark">
         
-        <th>Image</th>
-        <th>Email</th>
-        <th>First</th>
-        <th>Last</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Area</th>
-        <th>Type</th>
-        <th>Address</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Zip</th>
-        <th>Admin</th>
+        <tr>
+          
+          <th>Image</th>
+          <th>Email</th>
+          <th>First</th>
+          <th>Last</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Area</th>
+          <th>Type</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip</th>
+          <th>Admin</th>
 
-      </tr>
+        </tr>
 
-    </thead>
+      </thead>
 
-    <tbody>
-      <% users.forEach((user) => { %>
-      <tr>
-        
-        <th><img src="<%= user.avatar %>"></th>
-        <th><a href="/users/<%= user._id %>/view"><%= user.email %></a></th>
-        <th><%= user.firstName %></th>
-        <th><%= user.lastName %></th>
-        <th><%= user.jobTitle %></th>
-        <th><%= user.jobDescriptor %></th>
-        <th><%= user.jobArea %></th>
-        <th><%= user.jobType %></th>
-        <th><%= user.streetAddress %></th>
-        <th><%= user.city %></th>
-        <th><%= user.state %></th>
-        <th><%= user.zipCode %></th>
-        <th><%= user.admin %></th>
+      <tbody>
+        <% users.forEach((user) => { %>
+        <tr>
+          
+          <th><img src="<%= user.avatar %>"></th>
+          <th><a href="/users/<%= user._id %>/view"><%= user.email %></a></th>
+          <th><%= user.firstName %></th>
+          <th><%= user.lastName %></th>
+          <th><%= user.jobTitle %></th>
+          <th><%= user.jobDescriptor %></th>
+          <th><%= user.jobArea %></th>
+          <th><%= user.jobType %></th>
+          <th><%= user.streetAddress %></th>
+          <th><%= user.city %></th>
+          <th><%= user.state %></th>
+          <th><%= user.zipCode %></th>
+          <th><%= user.admin %></th>
 
-      </tr>
-      <% }) %>
-    </tbody>
+        </tr>
+        <% }) %>
+      </tbody>
 
-  </table>
+    </table>
+
+  </div>
 
 </div>
 
