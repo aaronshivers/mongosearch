@@ -7,6 +7,7 @@ const url = `mongodb://${ MONGO_USER }:${ encodedpass }@${ MONGO_SERVER }/${ MON
 mongoose.set('useNewUrlParser', true)
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
+mongoose.set('autoIndex', false)
 
 mongoose.connect(url)
 

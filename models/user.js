@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
@@ -37,6 +38,29 @@ const userSchema = new Schema({
     default: false
   }
 })
+
+// Maximum Ranges
+// A collection cannot have more than 64 indexes.
+// The length of the index name cannot be longer than 125 characters.
+// A compound index can have maximum 31 fields indexed.
+
+userSchema.index({
+  email: 'text',
+  firstName: 'text',
+  lastName: 'text',
+  // jobTitle: 'text',
+  // jobDescriptor: 'text',
+  // jobArea: 'text',
+  // jobType: 'text',
+  // streetAddress: 'text',
+  // streetPrefix: 'text',
+  // streetName: 'text',
+  // streetSuffix: 'text',
+  city: 'text',
+  state: 'text',
+  zipCode: 'text'
+})
+
 
 const User = mongoose.model('User', userSchema)
 
