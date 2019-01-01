@@ -4,7 +4,7 @@ const app = require('../app.js')
 const User = require('../models/user')
 
 const populateDatabase = () => {
-  const userQty = 10
+  const userQty = 100
 
   User.deleteMany().then(() => {
 
