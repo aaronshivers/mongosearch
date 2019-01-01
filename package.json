@@ -1,0 +1,31 @@
+{
+  "name": "mongosearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha tests/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronshivers/mongosearch.git"
+  },
+  "author": "aaron shivers",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/aaronshivers/mongosearch/issues"
+  },
+  "homepage": "https://github.com/aaronshivers/mongosearch#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "helmet": "^3.15.0",
+    "mongoose": "^5.4.1"
+  },
+  "devDependencies": {
+    "dotenv": "^6.2.0",
+    "expect": "^23.6.0",
+    "faker": "^4.1.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
+  }
+}
