@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const User = require('../models/user')
+const populateDatabase = require('../middleware/populate-database')
 
 router.post('/users', (req, res) => {
   const { email, password } = req.body
@@ -39,6 +40,12 @@ router.post('/users/search', (req, res) => {
 
     res.render('results', { users })
   }).catch(err => res.status(500).send(err.message))
+})
+
+router.get('/users/populate', (req, res) => {
+  populateDatabase()
+
+  setTimeout(() => res.redirect('/users'), 5000)
 })
 
 module.exports = router
