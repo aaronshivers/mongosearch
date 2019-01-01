@@ -19,6 +19,7 @@ const userSchema = new Schema({
     minlength: 8,
     maxlength: 100
   },
+  avatar: { type: String },
   firstName: { type: String },
   lastName: { type: String },
   jobTitle: { type: String },

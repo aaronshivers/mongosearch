@@ -11,6 +11,7 @@ const populateDatabase = () => {
     for (let i = 0; i < userQty; i++) {
       const email = faker.internet.email()
       const password = faker.internet.password()
+      const avatar = faker.image.avatar()
       const firstName = faker.name.firstName()
       const lastName = faker.name.lastName()
       const jobTitle = faker.name.jobTitle()
