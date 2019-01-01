@@ -26,7 +26,7 @@ const populateDatabase = () => {
       const newUser = {
         email, password, firstName, lastName,
         jobTitle, jobDescriptor, jobArea, jobType,
-        streetAddress, city, state, zipCode
+        streetAddress, city, state, zipCode, avatar
       }
 
       const user = new User(newUser)

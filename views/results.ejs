@@ -2,7 +2,7 @@
 
 <div id="homeContainer" class="container">
 
-  <h1 class="text-center">View User</h1>
+  <h1 class="text-center">Results List</h1>
 
   <table class="table">
     
@@ -29,10 +29,9 @@
     </thead>
 
     <tbody>
-
+      <% users.forEach((user) => { %>
       <tr>
-        <%= user %>
-        <%= user[0].admin %>
+        
         <th><img src="<%= user.avatar %>"></th>
         <th><a href="/users/<%= user._id %>/view"><%= user.email %></a></th>
         <th><%= user.firstName %></th>
@@ -48,7 +47,7 @@
         <th><%= user.admin %></th>
 
       </tr>
-
+      <% }) %>
     </tbody>
 
   </table>

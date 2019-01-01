@@ -1,0 +1,20 @@
+<% include partials/top %>
+
+<div class="container">
+
+  <h1 class="text-center">Search Form</h1>
+
+  <form class="form" action="/users/search" method="POST">
+    
+    <div class="form-group">
+      <label for="query">Search</label>
+      <input class="form-control" type="search" name="query" placeholder="Enter Search..." required>
+    </div>
+
+    <button class="btn btn-lg btn-outline-success btn-block">Start Searching</button>
+
+  </form>
+
+</div>
+
+<% include partials/bottom %>

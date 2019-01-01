@@ -19,14 +19,18 @@ router.get('/users', (req, res) => {
   })
 })
 
+router.get('/users/search', (req, res) => {
+  res.render('search')
+})
+
 router.post('/users/search', (req, res) => {
   const { query } = req.body
+  
+  User.find( { $text: { $search: query } } ).then((users) => {
+    if (!users) return res.status(404).send(`Sorry, we couldn't find that.`)
 
-  User.find( { $text: { $search: query } } ).then((user) => {
-    if (!user) return res.status(404).send(`Sorry, we couldn't find that.`)
-    
-    res.send(user)
-  }).catch(err => res.status(500).send(err))
+    res.render('results', { users })
+  }).catch(err => res.status(500).send(err.message))
 })
 
 module.exports = router
