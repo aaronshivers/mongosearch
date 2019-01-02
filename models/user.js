@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+// const mongoosePaginate = require('mongoose-paginate')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
@@ -59,6 +59,7 @@ userSchema.index({
   zipCode: 'text'
 })
 
+// userSchema.plugin(mongoosePaginate)
 
 const User = mongoose.model('User', userSchema)
 

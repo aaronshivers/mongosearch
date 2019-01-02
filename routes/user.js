@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const paginate = require('express-paginate')
 
 const User = require('../models/user')
 const populateDatabase = require('../middleware/populate-database')
@@ -14,10 +15,25 @@ router.post('/users', (req, res) => {
   }).catch(err => res.status(400).send(err.message))
 })
 
-router.get('/users', (req, res) => {
-  User.find().then((users) => {
-    res.render('users', { users })
-  })
+router.get('/users', async (req, res, next) => {
+  
+  try {
+    const [ results, itemCount ] = await Promise.all([
+      User.find({}).limit(req.query.limit).skip(req.skip).lean().exec(),
+      User.count({})
+    ])
+
+    const pageCount = Math.ceil(itemCount / req.query.limit)
+
+    res.render('users', {
+      users: results,
+      pageCount,
+      itemCount,
+      pages: paginate.getArrayPages(req)(4, pageCount, req.query.page)
+    })
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.get('/users/:id/view', (req, res) => {
@@ -32,14 +48,49 @@ router.get('/users/search', (req, res) => {
   res.render('search')
 })
 
-router.post('/users/search', (req, res) => {
-  const { query } = req.body
+router.get('/users/results', async (req, res, next) => {
+  const { query } = req.query
 
-  User.find( { $text: { $search: query } } ).then((users) => {
-    if (!users) return res.status(404).send(`Sorry, we couldn't find that.`)
+  try {
+    const [ results, itemCount ] = await Promise.all([
+      User.find( { $text: { $search: query } } ).limit(req.query.limit).skip(req.skip).lean().exec(),
+      User.count( { $text: { $search: query } } )
+    ])
 
-    res.render('results', { users })
-  }).catch(err => res.status(500).send(err.message))
+    // if (!results) return res.status(404).send(`Sorry, we couldn't find that.`)
+
+    const pageCount = Math.ceil(itemCount / req.query.limit)
+
+    res.render('results', {
+      users: results,
+      pageCount,
+      itemCount,
+      pages: paginate.getArrayPages(req)(4, pageCount, req.query.page)
+    })
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/users', async (req, res, next) => {
+  
+  try {
+    const [ results, itemCount ] = await Promise.all([
+      User.find({}).limit(req.query.limit).skip(req.skip).lean().exec(),
+      User.count({})
+    ])
+
+    const pageCount = Math.ceil(itemCount / req.query.limit)
+
+    res.render('users', {
+      users: results,
+      pageCount,
+      itemCount,
+      pages: paginate.getArrayPages(req)(10, pageCount, req.query.page)
+    })
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.get('/users/populate', (req, res) => {
