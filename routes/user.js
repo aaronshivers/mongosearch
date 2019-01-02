@@ -57,7 +57,10 @@ router.get('/users/results', async (req, res, next) => {
       User.count( { $text: { $search: query } } )
     ])
 
-    // if (!results) return res.status(404).send(`Sorry, we couldn't find that.`)
+    if (results < 1) return res.status(404).render('error', {
+    statusCode: '404',
+    errorMessage: 'Sorry, we cannot find that!'
+  })
 
     const pageCount = Math.ceil(itemCount / req.query.limit)
 
