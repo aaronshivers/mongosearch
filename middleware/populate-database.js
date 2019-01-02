@@ -36,6 +36,4 @@ const populateDatabase = () => {
   })
 }
 
-populateDatabase()
-
 module.exports = populateDatabase
