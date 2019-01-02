@@ -1,60 +1,37 @@
 <% include partials/top %>
 
 <div id="homeContainer" class="container">
-<%= pageCount %>
-<%= paginate.hasNextPages(pageCount) %>
+
   <h1 class="text-center">Results List</h1>
 
-  <div class="table-responsive-md">
+    <div class="card-deck">
 
-    <table class="table">
-      
-      <thead class="table-dark">
-        
-        <tr>
-          
-          <th>Image</th>
-          <th>Email</th>
-          <th>First</th>
-          <th>Last</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Area</th>
-          <th>Type</th>
-          <th>Address</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Zip</th>
-          <th>Admin</th>
+      <div class="row">
 
-        </tr>
-
-      </thead>
-
-      <tbody>
         <% users.forEach((user) => { %>
-        <tr>
-          
-          <th><img src="<%= user.avatar %>"></th>
-          <th><a href="/users/<%= user._id %>/view"><%= user.email %></a></th>
-          <th><%= user.firstName %></th>
-          <th><%= user.lastName %></th>
-          <th><%= user.jobTitle %></th>
-          <th><%= user.jobDescriptor %></th>
-          <th><%= user.jobArea %></th>
-          <th><%= user.jobType %></th>
-          <th><%= user.streetAddress %></th>
-          <th><%= user.city %></th>
-          <th><%= user.state %></th>
-          <th><%= user.zipCode %></th>
-          <th><%= user.admin %></th>
+        <div class="col-lg-3 col-md-4 col-sm-6">
 
-        </tr>
-        <% }) %>
-      </tbody>
+          <a href="/users/<%= user._id %>/view">
 
-    </table>
+            <div class="card border-0">
+              
+              <img class="card-img-top rounded-circle mx-auto w-50" src="<%= user.avatar %>">
 
+            <div class="card-body">
+              
+              <h5 class="card-title text-center"><%= user.firstName %> <%= user.lastName %></h5>
+
+            </div>
+
+          </div>
+
+        </a>
+
+      </div>
+      <% }) %>
+
+    </div>
+      
   </div>
 
   <% if (paginate.hasPreviousPages || paginate.hasNextPages(pageCount)) { %>
