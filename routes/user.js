@@ -5,6 +5,12 @@ const paginate = require('express-paginate')
 const User = require('../models/user')
 const populateDatabase = require('../middleware/populate-database')
 
+// Required to prevent getting infinite results
+router.all('*', (req, res, next) => {
+  if (req.query.limit <= 10) req.query.limit = 10
+  next()
+})
+
 router.post('/users', (req, res) => {
   const { email, password } = req.body
   const newUser = { email, password }
@@ -69,27 +75,6 @@ router.get('/users/results', async (req, res, next) => {
       pageCount,
       itemCount,
       pages: paginate.getArrayPages(req)(4, pageCount, req.query.page)
-    })
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.get('/users', async (req, res, next) => {
-  
-  try {
-    const [ results, itemCount ] = await Promise.all([
-      User.find({}).limit(req.query.limit).skip(req.skip).lean().exec(),
-      User.count({})
-    ])
-
-    const pageCount = Math.ceil(itemCount / req.query.limit)
-
-    res.render('users', {
-      users: results,
-      pageCount,
-      itemCount,
-      pages: paginate.getArrayPages(req)(10, pageCount, req.query.page)
     })
   } catch (err) {
     next(err)
